@@ -7,3 +7,11 @@ module.exports.sayHello = function () {
   console.log("Hello")
 }
 module.exports.age = age
+
+// 让module.exports指向一个全新的对象
+module.exports = {
+  nickName: "小黑",
+  sayHi() {
+    console.log("Hello")
+  },
+}
