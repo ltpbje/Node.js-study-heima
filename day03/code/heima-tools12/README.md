@@ -1,13 +1,13 @@
 ## 安装
 
 ```
-npm install itheima-tools
+npm install heima-tools12
 ```
 
 ## 导入
 
 ```js
-const itheima = require("itheima-tools")
+const itheima = require("heima-tools12")
 ```
 
 ## 格式化时间
