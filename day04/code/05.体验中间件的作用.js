@@ -21,8 +21,6 @@ app.use((req, res, next) => {
 })
 
 app.get("/", (req, res) => {
-  console.log("调用了 / 这个路由")
-
   res.send("Home page" + req.startTime)
 })
 
