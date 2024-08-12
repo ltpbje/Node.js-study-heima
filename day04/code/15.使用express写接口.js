@@ -2,7 +2,8 @@
 const express = require("express")
 // 创建express的服务器实例;
 const app = express()
-
+// 配置解析表单数的中间件
+app.use(express.urlencoded({ extended: false }))
 // 导入路由模块
 const router = require("./16.apiRouter")
 // 把路由模块，注册到app上
