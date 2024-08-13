@@ -12,6 +12,7 @@
     <button id="btnGET">GET</button>
     <button id="btnPOST">POST</button>
     <button id="btnDELETE">DELETE</button>
+    <button id="btnJSONP">JSONP</button>
     <script>
         $(function () {
             // 1.测试GET接口
@@ -48,6 +49,18 @@
                     }
                 })
             })
+            // 4.为JSONP按钮绑定点击事件处理函数
+            $('#btnJSONP').on('click', function () {
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://127.0.0.1/api/jsonp',
+                    dataType: "JSONP",
+                    success: function (res) {
+                        console.log(res)
+                    }
+                })
+            })
+
         })
     </script>
 </body>
