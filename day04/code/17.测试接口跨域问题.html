@@ -11,6 +11,7 @@
 <body>
     <button id="btnGET">GET</button>
     <button id="btnPOST">POST</button>
+    <button id="btnDELETE">DELETE</button>
     <script>
         $(function () {
             // 1.测试GET接口
@@ -35,6 +36,16 @@
                     success: function (res) {
                         console.log(res)
                     },
+                })
+            })
+            // 2.测试DELETE接口
+            $('#btnDELETE').on('click', function () {
+                $.ajax({
+                    type: 'DELETE',
+                    url: 'http://127.0.0.1/api/delete',
+                    success: function (res) {
+                        console.log(res)
+                    }
                 })
             })
         })
