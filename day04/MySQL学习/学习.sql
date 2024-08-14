@@ -15,4 +15,14 @@
 
 -- 更新id为2的用户，把用户密码更新为admin123同时，把用户的状态更新为1
 -- update users set password='admin123',status = 1 where id =2
-select * from users
+-- select * from users
+-- 注意：对初学者来说，经常忘记提供WHEREE条件，
+--    从而导致误删整张表的数据！一定要慎重！
+-- delete from users where id =4
+-- select * from users
+
+-- 演示where子句的使用
+-- select * from users where status =1 
+-- select * from users where id >=2
+-- select * from users where username<>'ls'
+-- select * from users where username != 'ls'
