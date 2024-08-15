@@ -26,3 +26,6 @@
 -- select * from users where id >=2
 -- select * from users where username<>'ls'
 -- select * from users where username != 'ls'
+
+-- 使用AND来显示所有状态为0且id小于3的用户
+select * from users where status = 0 and id < 3
