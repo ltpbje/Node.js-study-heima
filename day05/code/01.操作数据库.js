@@ -9,11 +9,21 @@ const db = mysql.createPool({
   database: "my_db_01", //指定要操作哪个数据库
 })
 
-//测试mysql 模块能否正常工作
-db.query("select 1", (err, results) => {
-  //mysql模块工作期间报错了
-  if (err) return console.log(err.message)
+// //测试mysql 模块能否正常工作
+// db.query("select 1", (err, results) => {
+//   //mysql模块工作期间报错了
+//   if (err) return console.log(err.message)
 
-  //能够成功的执行SQL语句
+//   //能够成功的执行SQL语句
+//   console.log(results)
+// })
+
+// 查询users表中所有的数据
+const sqlStr = "select * from users"
+db.query(sqlStr, (err, results) => {
+  // 查询数据失败
+  if (err) return console.log(err.message)
+  // 查询数据成功
+  // 注意：如果执行的是select查询语句，则执行的结果是数组
   console.log(results)
 })
