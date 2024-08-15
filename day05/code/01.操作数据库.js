@@ -8,3 +8,12 @@ const db = mysql.createPool({
   password: "admin123", //录数据库的密码
   database: "my_db_01", //指定要操作哪个数据库
 })
+
+//测试mysql 模块能否正常工作
+db.query("select 1", (err, results) => {
+  //mysql模块工作期间报错了
+  if (err) return console.log(err.message)
+
+  //能够成功的执行SQL语句
+  console.log(results)
+})
