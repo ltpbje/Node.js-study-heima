@@ -32,3 +32,11 @@
 
 --  使用 or 来显示所有状态为 1 或 username 为zs的用户
 -- select * from  users where status=1 or username ='zs'
+
+-- 对users表中的数据，按照status字段进行升序排序
+-- select * from  users order by status 
+
+--  按照id对结果进行降序的排序 desc表示降序排序 asc表示升序排序 (默认情况下，就是升序排序的）
+-- select * from users order by id desc;
+-- select * from users order by id asc;
+
