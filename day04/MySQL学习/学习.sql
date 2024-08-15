@@ -42,3 +42,7 @@
 
 -- 对users表中的数据，先按照status进行降序排序，再按照username字母的顺序，进行升序的排序
 -- select * from users order by status desc ,username asc
+
+
+-- 使用count（*）来统计users表中，状态为0用户的总数量
+-- select count(*) from users where status = 0;
