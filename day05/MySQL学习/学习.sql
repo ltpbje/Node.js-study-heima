@@ -50,3 +50,4 @@
 -- 使用AS关键字给列起别名
 -- select count(*) as total from users where status = 0
 -- select username as uname,password as upwd from  users 
+select * from	users
