@@ -90,3 +90,11 @@ const db = mysql.createPool({
 //     console.log("删除数据成功")
 //   }
 // })
+
+// 标记删除：使用UPDATE语句替代DELETE语句；只更新数据的状态，并没有真正删除
+db.query("update users set status = 1 where id=?", 6, (err, results) => {
+  if (err) return console.log(err.message)
+  if (results.affectedRows === 1) {
+    console.log("删除数据成功")
+  }
+})
