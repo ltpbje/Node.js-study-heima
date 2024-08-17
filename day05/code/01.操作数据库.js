@@ -69,14 +69,24 @@ const db = mysql.createPool({
 //   }
 // })
 
-// 更新用户信息的简易写法
-const user = { id: 6, username: "aaaa", password: "0000" }
-//定义SQL语句
-const sqlStr = "update users set ? where id = ?"
-//执行SQL语句
-db.query(sqlStr, [user, user.id], (err, results) => {
-  if (err) return console.log(err.message)
-  if (results.affectedRows === 1) {
-    console.log("更新完成")
-  }
-})
+// // 更新用户信息的简易写法
+// const user = { id: 6, username: "aaaa", password: "0000" }
+// //定义SQL语句
+// const sqlStr = "update users set ? where id = ?"
+// //执行SQL语句
+// db.query(sqlStr, [user, user.id], (err, results) => {
+//   if (err) return console.log(err.message)
+//   if (results.affectedRows === 1) {
+//     console.log("更新完成")
+//   }
+// })
+
+// // 删除id为5的用户
+// const sqlStr = "delete from users where id = ?"
+// db.query(sqlStr, 5, (err, results) => {
+//   if (err) return console.log(err.message)
+//   // 注意：执行delete语句之后，结果也是一个对象，也会包含affectedRows属性
+//   if (results.affectedRows === 1) {
+//     console.log("删除数据成功")
+//   }
+// })
