@@ -35,6 +35,17 @@ app.post("/api/login", (req, res) => {
 // 获取用户姓名的接口
 app.get("/api/username", (req, res) => {
   // TODO_03：请从 Session 中获取用户的名称，响应给客户端
+  if (!req.session.isLogin) {
+    return res.send({
+      status: 1,
+      msg: "fail",
+    })
+  }
+  res.send({
+    status: 0,
+    msg: "success",
+    username: req.session.user.username,
+  })
 })
 
 // 退出登录的接口
