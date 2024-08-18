@@ -51,6 +51,11 @@ app.get("/api/username", (req, res) => {
 // 退出登录的接口
 app.post("/api/logout", (req, res) => {
   // TODO_04：清空 Session 信息
+  req.session.destroy()
+  res.send({
+    status: 0,
+    msg: "退出登录成功",
+  })
 })
 
 // 调用 app.listen 方法，指定端口号并启动web服务器
