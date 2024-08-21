@@ -1,3 +1,6 @@
+// 导入数据库操作模块
+const db = require("../db/index")
+
 exports.regUser = (req, res) => {
   // 接收表单数据
   const userinfo = req.body
@@ -10,6 +13,20 @@ exports.regUser = (req, res) => {
       message: "用户名或密码不能为空",
     })
   }
+
+  //定义SQL语句，查询用户名是否被占用
+  const sqlStr = "select * from ev_users where username = ?"
+  db.query(sqlStr, userinfo.username, (err, results) => {
+    // 执行 SQL 语句失败
+    if (err) {
+      return res.send({ status: 1, message: err.message })
+    }
+    // 用户名被占用
+    if (results.length > 0) {
+      return res.send({ status: 1, message: "用户名被占用,请更换其他用户名" })
+    }
+    // 用户名可以使用
+  })
   res.send("reguser OK")
 }
 exports.login = (req, res) => {
