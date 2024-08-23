@@ -7,13 +7,13 @@ exports.regUser = (req, res) => {
   const userinfo = req.body
   // console.log(userinfo)
 
-  // 判断数据是否合法
-  if (!userinfo.username || !userinfo.password) {
-    return res.send({
-      status: 1,
-      message: "用户名或密码不能为空",
-    })
-  }
+  // // 判断数据是否合法
+  // if (!userinfo.username || !userinfo.password) {
+  //   return res.send({
+  //     status: 1,
+  //     message: "用户名或密码不能为空",
+  //   })
+  // }
 
   //定义SQL语句，查询用户名是否被占用
   const sqlStr = "select * from ev_users where username = ?"
