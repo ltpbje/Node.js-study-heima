@@ -54,5 +54,14 @@ exports.regUser = (req, res) => {
   })
 }
 exports.login = (req, res) => {
-  res.send("login OK")
+  const userinfo = req.body
+  const sql = "select * from ev_users where username =?"
+  db.query(sql, userinfo.username, function (err, results) {
+    // 执行 SQL 语句失败
+    if (err) return res.cc(err)
+    // 执行 SQL 语句成功，  但是查询到数据条数不等于 1
+    if (results.length !== 1) return res.cc("登录失败")
+    // TODO：判断用户输入的登录密码是否和数据库中的密码一致
+    res.send("login ok")
+  })
 }
