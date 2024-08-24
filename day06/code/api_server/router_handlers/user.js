@@ -2,6 +2,11 @@
 const db = require("../db/index")
 //导入bcryptjs这个包
 const bcryptjs = require("bcryptjs")
+// 用这个包来生成 Token 字符串
+const jwt = require("jsonwebtoken")
+// 导入配置文件
+const config = require("../config")
+
 exports.regUser = (req, res) => {
   // 接收表单数据
   const userinfo = req.body
@@ -68,6 +73,19 @@ exports.login = (req, res) => {
       results[0].password
     )
     if (!compareResult) return res.cc("登录失败!")
-    res.send("ok")
+    // res.send("ok")
+    // 剔除完毕之后，user 中只保留了用户的 id, username, nickname, email 这四个属性的值
+    const user = { ...results[0], password: "", user_pic: "" }
+    // 生成 Token 字符串
+    const tokenStr = jwt.sign(user, config.jwtSecretKey, {
+      expiresIn: config.expiresIn,
+    })
+    res.send({
+      status: 0,
+      message: "登录成功!",
+      // 为了方便客户端使用 Token，在服务器端直接拼接上 Bearer 的前缀
+      token: "Bearer " + tokenStr,
+    })
+    // console.log(tokenStr)
   })
 }
