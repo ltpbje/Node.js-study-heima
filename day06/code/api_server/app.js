@@ -39,7 +39,11 @@ app.use(
 
 // 导入并注册用户路由模块
 const userRouter = require("./router/user")
+// 导入并使用用户信息路由模块
+const userinfoRouter = require("./router/userinfo")
+
 app.use("/api", userRouter)
+app.use("/my", userinfoRouter)
 
 // 错误中间件
 app.use(function (err, req, res, next) {
