@@ -17,6 +17,8 @@ router.post(
   expressJoi(update_userinfo_schema),
   userinfo_handler.updateUserInfo
 )
+// 更新用户的密码
+router.post("/updatepwd", userinfo_handler.updatePassword)
 
 // 向外共享路由对象
 module.exports = router

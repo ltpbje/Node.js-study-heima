@@ -34,3 +34,8 @@ exports.updateUserInfo = (req, res) => {
     return res.cc("修改用户基本信息成功!", 0)
   })
 }
+
+// 更新用户的密码
+exports.updatePassword = (req, res) => {
+  res.send("ok")
+}
