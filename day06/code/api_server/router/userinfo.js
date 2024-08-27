@@ -10,6 +10,7 @@ const expressJoi = require("@escook/express-joi")
 const {
   update_password_schema,
   update_userinfo_schema,
+  update_avatar_schema,
 } = require("../schema/user")
 
 // 获取用户的基本信息
@@ -28,7 +29,11 @@ router.post(
 )
 
 // 更新用户头像的路由
-router.post("/update/avatar", userinfo_handler.updateAvatar)
+router.post(
+  "/update/avatar",
+  expressJoi(update_avatar_schema),
+  userinfo_handler.updateAvatar
+)
 
 // 向外共享路由对象
 module.exports = router

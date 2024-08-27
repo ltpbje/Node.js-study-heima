@@ -29,14 +29,20 @@ exports.getUserInfo = (req, res) => {
 // 更新用户基本信息的处理函数
 exports.updateUserInfo = (req, res) => {
   const sql = "update ev_users set ? where id =? "
-  db.query(sql, [req.body, req.body.id], (err, results) => {
-    // 执行 SQL 语句失败
-    if (err) return res.cc(err)
-    // 执行 SQL 语句成功，但影响行数不为 1
-    if (results.affectedRows !== 1) return res.cc("修改用户基本信息失败！")
-    // 修改用户信息成功
-    return res.cc("修改用户基本信息成功!", 0)
-  })
+  db.query(
+    sql,
+    [{ nickname: req.body.nickname, email: req.body.email }, req.body.id],
+    (err, results) => {
+      // console.log(req.user.id)
+
+      // 执行 SQL 语句失败
+      if (err) return res.cc(err)
+      // 执行 SQL 语句成功，但影响行数不为 1
+      if (results.affectedRows !== 1) return res.cc("修改用户基本信息失败！")
+      // 修改用户信息成功
+      return res.cc("修改用户基本信息成功!", 0)
+    }
+  )
 }
 
 // 更新用户的密码
@@ -79,5 +85,14 @@ exports.updatePassword = (req, res) => {
 
 // 更新用户头像的处理函数
 exports.updateAvatar = (req, res) => {
-  res.send("ok")
+  const sql = "update ev_users set user_pic = ? where id = ?"
+  db.query(sql, [req.body.avatar, req.user.id], (err, results) => {
+    // 执行 SQL 语句失败
+    if (err) return res.cc(err)
+    // 执行 SQL 语句成功，但是影响行数不等于 1
+    if (results.affectedRows !== 1) return res.cc("更新用户头像失败!")
+    // 更新用户头像成功
+    return res.cc("更新头像成功!", 0)
+  })
+  // res.send("ok")
 }
