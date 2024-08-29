@@ -41,9 +41,13 @@ app.use(
 const userRouter = require("./router/user")
 // 导入并使用用户信息路由模块
 const userinfoRouter = require("./router/userinfo")
+// 导入并使用文章路由模块
+const articleRouter = require("./router/article")
 
 app.use("/api", userRouter)
 app.use("/my", userinfoRouter)
+// 为文章的路由挂载统一的访问前缀 /my/article
+app.use("/my/article", articleRouter)
 
 // 错误中间件
 app.use(function (err, req, res, next) {
