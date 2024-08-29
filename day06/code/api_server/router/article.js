@@ -2,11 +2,11 @@
 const express = require("express")
 // 创建express的服务器实例;
 const router = express.Router()
+// 导入文章分类的路由处理函数模块
+const artcate_handler = require("../router_handlers/artcate")
 
-// 发布新文章
-router.post("/add", (req, res) => {
-  res.send("ok")
-})
+// 获取文章分类的列表数据
+router.get("/cates", artcate_handler.getArticleCates)
 
 // 向外共享路由对象
-exports = router
+module.exports = router
