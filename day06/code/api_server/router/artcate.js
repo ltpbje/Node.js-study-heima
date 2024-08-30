@@ -7,6 +7,8 @@ const artcate_handler = require("../router_handlers/artcate")
 
 // 获取文章分类的列表数据
 router.get("/cates", artcate_handler.getArticleCates)
+// 新增文章分类的路由
+router.post("/addcates", artcate_handler.addArticleCates)
 
 // 向外共享路由对象
 module.exports = router
