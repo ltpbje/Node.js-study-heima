@@ -31,17 +31,28 @@ exports.addArticleCates = (req, res) => {
     //4.1判断数据的length
     if (results.length === 2)
       return res.cc("分类名称和分类别名分别被占用 请更换后重试")
-    if (results.length === 1 && results[0].name === req.body.name)
-      return res.cc("分类名称被占用 请更换后重试")
-    if (results.length === 1 && results[0].alias === req.body.alias)
-      return res.cc("分类别名被占用 请更换后重试")
     if (
       results.length === 1 &&
       results[0].alias === req.body.alias &&
       results[0].name === req.body.name
     )
       return res.cc("分类名称和分类别名分别被占用 请更换后重试")
+    if (results.length === 1 && results[0].name === req.body.name)
+      return res.cc("分类名称被占用 请更换后重试")
+    if (results.length === 1 && results[0].alias === req.body.alias)
+      return res.cc("分类别名被占用 请更换后重试")
 
     //TODO：分类名称和分类别名都可用，执行添加的动作
+    //定义插入文章分类的SQL语句
+    const sql = "insert into ev_article_cate set ?"
+    //执行插入文章分类的SQL语句
+    db.query(sql, req.body, (err, results) => {
+      // SQL 语句执行失败
+      if (err) return res.cc(err)
+      // SQL 语句执行成功，但是影响行数不等于 1
+      if (results.affectedRows !== 1) return res.cc("新增文章分类失败!")
+      // 新增文章分类成功
+      res.cc("新增文章分类成功!", 0)
+    })
   })
 }
