@@ -75,12 +75,48 @@ exports.deleteCateById = (req, res) => {
 exports.getArticleById = (req, res) => {
   const sql = "select * from ev_article_cate where id = ?"
   db.query(sql, req.params.id, (err, results) => {
+    // 执行 SQL 语句失败
     if (err) return res.cc(err)
+    // SQL 语句执行成功，但是没有查询到任何数据
     if (results.length !== 1) return res.cc("查询数据失败!")
+    // 把数据响应给客户端
     res.send({
       status: 0,
       message: "查询成功!",
       data: results[0],
     })
   })
+}
+
+// 更新文章分类的处理函数
+exports.updateCateById = (req, res) => {
+  // 定义查询 分类名称 与 分类别名 是否被占用的 SQL 语句
+  const sql =
+    "select * from ev_article_cate where id <> ? and (name =? or alias=?)"
+  db.query(
+    sql,
+    [req.body.Id, req.body.name, req.body.alias],
+    (err, results) => {
+      if (err) return res.cc(err)
+      // 判断 分类名称 和 分类别名 是否被占用
+      if (results.length === 2) return res.cc("分类名和分类别名分别被占用")
+      if (
+        results.length === 1 &&
+        results[0].name === req.body.name &&
+        results[0].alias === req.body.alias
+      )
+        return res.cc("分类名和分类别名被占用")
+      if (results.length === 1 && results[0].name === req.body.name)
+        return res.cc("分类名被占用")
+      if (results.length === 1 && results[0].alias === req.body.alias)
+        return res.cc("分类别名被占用")
+      // 定义更新文章分类的 SQL 语句
+      const sql = "update ev_article_cate set ? where id =?"
+      db.query(sql, [req.body, req.body.Id], (err, results) => {
+        if (err) return res.cc(err)
+        if (results.affectedRows !== 1) res.cc("更新数据失败!")
+        res.cc("更新数据成功", 0)
+      })
+    }
+  )
 }
