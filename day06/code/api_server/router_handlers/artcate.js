@@ -59,5 +59,14 @@ exports.addArticleCates = (req, res) => {
 
 // 删除文章分类的处理函数
 exports.deleteCateById = (req, res) => {
-  res.send("ok")
+  // 定义删除文章分类的 SQL 语句
+  const sql = "update ev_article_cate set is_delete =1 where id = ?"
+  db.query(sql, req.params.id, (err, results) => {
+    // 执行 SQL 语句失败
+    if (err) return res.cc(err)
+    // SQL 语句执行成功，但是影响行数不等于 1
+    if (results.affectedRows !== 1) return res.cc("删除文章分类失败！")
+    // 删除文章分类成功
+    res.cc("删除文章分类成功!")
+  })
 }
