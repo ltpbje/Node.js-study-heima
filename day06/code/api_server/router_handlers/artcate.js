@@ -70,3 +70,17 @@ exports.deleteCateById = (req, res) => {
     res.cc("删除文章分类成功!")
   })
 }
+
+// 根据 Id 获取文章分类的处理函数
+exports.getArticleById = (req, res) => {
+  const sql = "select * from ev_article_cate where id = ?"
+  db.query(sql, req.params.id, (err, results) => {
+    if (err) return res.cc(err)
+    if (results.length !== 1) return res.cc("查询数据失败!")
+    res.send({
+      status: 0,
+      message: "查询成功!",
+      data: results[0],
+    })
+  })
+}
